@@ -1,0 +1,24 @@
+// Min 0, max 32
+#define JOYSTICK_BUTTON_COUNT 32
+// ** Don't plan to use axes, so setting to min values I guess?
+// Min 0, max 6: X, Y, Z, Rx, Ry, Rz
+#define JOYSTICK_AXIS_COUNT 0
+// Min 8, max 16
+#define JOYSTICK_AXIS_RESOLUTION 8
+
+#define DEBOUNCE 0
+
+// Disable RGB effects to save memory
+#undef RGBLIGHT_EFFECT_ALTERNATING
+#undef RGBLIGHT_EFFECT_BREATHING
+#undef RGBLIGHT_EFFECT_CHRISTMAS
+#undef RGBLIGHT_EFFECT_KNIGHT
+#undef RGBLIGHT_EFFECT_RAINBOW_MOOD
+#undef RGBLIGHT_EFFECT_RAINBOW_SWIRL
+#undef RGBLIGHT_EFFECT_RGB_TEST
+#undef RGBLIGHT_EFFECT_SNAKE
+#undef RGBLIGHT_EFFECT_STATIC_GRADIENT
+#undef RGBLIGHT_EFFECT_TWINKLE
+
+#define RGBLIGHT_LAYERS
+// #define RGBLIGHT_MAX_LAYERS 8

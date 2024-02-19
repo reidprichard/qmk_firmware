@@ -21,63 +21,174 @@ enum layer_names {
     _BASE,
     _FN1,
     _FN2,
-    _FN3
+    _NUMPAD,
+    _NUM_FN1,
 };
 
+// keycodes: https://github.com/qmk/qmk_firmware/blob/master/docs/keycodes.md
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base */
     [_BASE] = LAYOUT(
-                  KC_F1,   KC_F2,   KC_F3,   KC_F4,
-                  KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS,
-                  KC_P7,   KC_P8,   KC_P9,   KC_PPLS,
-        KC_MUTE,  KC_P4,   KC_P5,   KC_P6,   _______,
-        MO(_FN1), KC_P1,   KC_P2,   KC_P3,   KC_PENT,
-        KC_BSPC,  KC_P0,   _______, KC_PDOT, _______,
+                      KC_MEDIA_PLAY_PAUSE,  KC_MPRV,  KC_MNXT,    KC_MUTE,
+                      KC_Q,                 KC_R,     KC_S,       KC_T,
+                      KC_M,                 KC_N,     KC_O,       KC_P,
+        KC_U,         KC_I,                 KC_J,     KC_K,       KC_L,
+        MO(_FN2),     KC_E,                 KC_F,     KC_G,       KC_H,
+        MO(_FN1),     KC_A,                 KC_B,     KC_C,       KC_D,
 
-                  KC_F5,   KC_F6,   KC_F7
-
+                      KC_F1,                KC_F2,    KC_F3
     ),
     [_FN1] = LAYOUT(
-                 _______,  _______, _______, _______,
-                 _______,  _______, _______, _______,
-                 RGB_HUD,  RGB_SPI, RGB_HUI, _______,
-        _______, RGB_RMOD, RGB_TOG, RGB_MOD, _______,
-        _______, RGB_VAD,  RGB_SPD, RGB_VAI, _______,
-        _______, RGB_SAD,  _______, RGB_SAI, _______,
+                      KC_MEDIA_PLAY_PAUSE,  KC_MPRV,    KC_MNXT,    KC_MUTE,
+                      JS_0,                 JS_1,       JS_2,       JS_3,
+                      JS_4,                 JS_5,       JS_6,       JS_7,
+        LCA(KC_F24),  KC_F21,               KC_F22,     KC_F23,     KC_F24,
+        TO(_NUMPAD),  KC_F17,               KC_F18,     KC_F19,     KC_F20,
+        MO(_FN1),     KC_F13,               KC_F14,     KC_F15,     KC_F16,
 
-                 _______, _______, _______
-
+                      KC_F1,                 KC_F2,     KC_F3
     ),
     [_FN2] = LAYOUT(
-                  _______, _______, _______, _______,
-                  _______, _______, _______, _______,
-                  _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,
+                      _______,                 _______,     _______,       QK_BOOTLOADER,
+                      _______,                 _______,     _______,       _______,
+                      _______,                 _______,     _______,       _______,
+        _______,      _______,                 _______,     _______,       _______,
+        MO(_FN2),     _______,                 _______,     _______,       _______,
+        TO(_NUMPAD),  _______,                 _______,     _______,       _______,
 
-                  _______, _______, _______
-
+                      KC_F1,                KC_F2,    KC_F3
     ),
-    [_FN3] = LAYOUT(
-                  _______, _______, _______, _______,
-                  _______, _______, _______, _______,
-                  _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,
-        _______,  _______, _______, _______, _______,
+    [_NUMPAD] = LAYOUT(
+                      _______,        _______,        _______,        _______,
+                      KC_NUM_LOCK,    KC_KP_SLASH,    KC_KP_ASTERISK, KC_KP_MINUS,
+                      KC_KP_7,        KC_KP_8,        KC_KP_9,        KC_KP_PLUS,
+        _______,      KC_KP_4,        KC_KP_5,        KC_KP_6,        KC_BSPC,
+        KC_LALT,      KC_KP_1,        KC_KP_2,        KC_KP_3,        KC_TAB,
+        MO(_NUM_FN1), KC_KP_0,        KC_KP_EQUAL,    KC_KP_DOT,      KC_PENT,
 
-                  _______, _______, _______
+                    _______,          _______,        _______
+    ),
+    [_NUM_FN1] = LAYOUT(
+                    PB_1,  PB_2,  PB_3,  PB_4,
+                    _______,  _______,  _______,  _______,
+                    _______,  _______,  _______,  _______,
+        _______,    KC_HOME,  KC_UP,    KC_PGUP,  _______,
+        TO(_BASE),  KC_LEFT,  KC_DOWN,  KC_RIGHT, KC_ESC,
+        _______,    KC_END,   KC_LCTL, KC_PGDN,   KC_CALC,
 
-    )
+                    _______,  _______,  _______
+    ),
 };
 
 #ifdef ENCODER_MAP_ENABLE
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_BRID, KC_BRIU) },
-    [_FN1]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_FN2]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_FN3]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [_BASE]    = { ENCODER_CCW_CW(LCA(KC_F22), LCA(KC_F23)),  ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_FN1]     = { ENCODER_CCW_CW(LSA(KC_F22), LSA(KC_F23)),  ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [_FN2]     = { ENCODER_CCW_CW(RCS(KC_F22), RCS(KC_F23)),  ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [_NUMPAD]  = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),         ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [_NUM_FN1]  = { ENCODER_CCW_CW(KC_LEFT, KC_RIGHT),        ENCODER_CCW_CW(KC_TRNS, KC_TRNS) }
 };
 #endif
+
+#ifdef OLED_ENABLE
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_270;       // flips the display 270 degrees
+}
+
+bool oled_task_user(void) {
+    oled_write_ln_P(PSTR("Layer"), false);
+
+    switch (get_highest_layer(layer_state)) {
+        case 0:
+            oled_write_ln_P(PSTR("Base"), false);
+            break;
+        case 1:
+            oled_write_ln_P(PSTR("FN 1"), false);
+            break;
+        case 2:
+            oled_write_ln_P(PSTR("FN 2"), false);
+            break;
+        case 3:
+            oled_write_ln_P(PSTR("FN 3"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Undef"), false);
+    }
+
+    oled_write_ln_P(PSTR(""), false);
+    oled_write_ln_P(PSTR(""), false);
+    oled_write_ln_P(PSTR(""), false);
+
+    // Host Keyboard LED Status
+    led_t led_state = host_keyboard_led_state();
+    oled_write_ln_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
+    oled_write_ln_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
+    oled_write_ln_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
+
+    return true;
+}
+#endif
+
+#ifdef RGBLIGHT_ENABLE
+
+#ifdef RGBLIGHT_LAYERS
+const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_RED}
+);
+const rgblight_segment_t PROGMEM my_default_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_TEAL}
+);
+const rgblight_segment_t PROGMEM my_fn1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_ORANGE}
+);
+const rgblight_segment_t PROGMEM my_fn2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_YELLOW}
+);
+const rgblight_segment_t PROGMEM my_numpad_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_MAGENTA}
+);
+const rgblight_segment_t PROGMEM my_numpadfn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_PINK}
+);
+
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    my_capslock_layer,
+    my_default_layer,
+    my_fn1_layer,
+    my_fn2_layer,
+    my_numpad_layer,
+    my_numpadfn_layer
+);
+#endif
+
+#endif
+
+void keyboard_post_init_user(void) {
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    rgblight_layers = my_rgb_layers;
+#endif
+}
+
+bool led_update_user(led_t led_state) {
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    rgblight_set_layer_state(0, led_state.caps_lock);
+#endif
+    return true;
+}
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    rgblight_set_layer_state(1, layer_state_cmp(state, _BASE));
+#endif
+    return state;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+#if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    rgblight_set_layer_state(2, layer_state_cmp(state, _FN1));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _FN2));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _NUM_FN1));
+#endif
+    return state;
+}
