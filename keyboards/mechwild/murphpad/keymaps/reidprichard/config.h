@@ -1,5 +1,5 @@
 // Min 0, max 32
-#define JOYSTICK_BUTTON_COUNT 32
+#define JOYSTICK_BUTTON_COUNT 20
 // ** Don't plan to use axes, so setting to min values I guess?
 // Min 0, max 6: X, Y, Z, Rx, Ry, Rz
 #define JOYSTICK_AXIS_COUNT 0

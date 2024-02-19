@@ -40,11 +40,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_FN1] = LAYOUT(
                       KC_MEDIA_PLAY_PAUSE,  KC_MPRV,    KC_MNXT,    KC_MUTE,
-                      JS_0,                 JS_1,       JS_2,       JS_3,
-                      JS_4,                 JS_5,       JS_6,       JS_7,
-        LCA(KC_F24),  KC_F21,               KC_F22,     KC_F23,     KC_F24,
-        TO(_NUMPAD),  KC_F17,               KC_F18,     KC_F19,     KC_F20,
-        MO(_FN1),     KC_F13,               KC_F14,     KC_F15,     KC_F16,
+                      JS_16,                 JS_17,       JS_18,       JS_19,
+                      JS_12,                 JS_13,       JS_14,       JS_15,
+        LCA(KC_F24),  JS_8,                 JS_9,       JS_10,       JS_11,
+        TO(_NUMPAD),  JS_4,                 JS_5,       JS_6,       JS_7,
+        MO(_FN1),     JS_0,                 JS_1,       JS_2,       JS_3,
 
                       KC_F1,                 KC_F2,     KC_F3
     ),
