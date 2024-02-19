@@ -199,13 +199,12 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
     rgblight_set_layer_state(5, layer_state_cmp(state, _NUM_FN1));
 
-    // If in NUMPAD layer and numlock off, pulse LEDs. No idea how to get this working.
-    // led_t led_state = host_keyboard_led_state();
-    // if (layer_state_cmp(state, _NUMPAD) && !led_state.num_lock) {
-    //     rgblight_mode_noeeprom(RGB_MODE_BREATHING);
+    // If in NUMPAD layer and numlock off, pulse LEDs. This gets overridden by lighting layers, so disabled for now.
+    // if (!led_state.num_lock) {
+    //     rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
     // }
     // else {
-    //     rgblight_mode_noeeprom(0);
+    //     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
     // }
 #endif
     return state;
