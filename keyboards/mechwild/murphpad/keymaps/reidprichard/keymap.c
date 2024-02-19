@@ -109,23 +109,27 @@ bool oled_task_user(void) {
             oled_write_ln_P(PSTR("FN 2"), false);
             break;
         case 3:
-            oled_write_ln_P(PSTR("FN 3"), false);
+            oled_write_ln_P(PSTR("Num"), false);
+            break;
+        case 4:
+            oled_write_ln_P(PSTR("#FN1"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undef"), false);
+            oled_write_ln_P(PSTR("?"), false);
     }
 
-    oled_write_ln_P(PSTR(""), false);
-    oled_write_ln_P(PSTR(""), false);
-    oled_write_ln_P(PSTR(""), false);
+    #define BLANK_LINE PSTR("    ")
+    oled_write_ln_P(BLANK_LINE, false);
+    oled_write_ln_P(BLANK_LINE, false);
+    // oled_write_ln_P(PSTR(""), false);
 
     // Host Keyboard LED Status
     led_t led_state = host_keyboard_led_state();
-    oled_write_ln_P(led_state.num_lock ? PSTR("NUM ") : PSTR("    "), false);
-    oled_write_ln_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
-    oled_write_ln_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
+    oled_write_ln_P(led_state.num_lock ? PSTR("NUM ") : BLANK_LINE, false);
+    oled_write_ln_P(led_state.caps_lock ? PSTR("CAP ") : BLANK_LINE, false);
+    oled_write_ln_P(led_state.scroll_lock ? PSTR("SCR ") : BLANK_LINE, false);
 
-    return true;
+    return false;
 }
 #endif
 
@@ -150,14 +154,18 @@ const rgblight_segment_t PROGMEM my_numpad_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t PROGMEM my_numpadfn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 8, HSV_PINK}
 );
+const rgblight_segment_t PROGMEM dummy_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 8, HSV_WHITE}
+);
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    my_capslock_layer,
+    dummy_layer, // I'm not sure why, but I can't seem to do anything with layer 0
     my_default_layer,
     my_fn1_layer,
     my_fn2_layer,
     my_numpad_layer,
-    my_numpadfn_layer
+    my_numpadfn_layer,
+    my_capslock_layer
 );
 #endif
 
@@ -171,24 +179,34 @@ void keyboard_post_init_user(void) {
 
 bool led_update_user(led_t led_state) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-    rgblight_set_layer_state(0, led_state.caps_lock);
+    rgblight_set_layer_state(6, led_state.caps_lock);
 #endif
     return true;
 }
 
 layer_state_t default_layer_state_set_user(layer_state_t state) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
-    rgblight_set_layer_state(1, layer_state_cmp(state, _BASE));
+    // rgblight_set_layer_state(1, layer_state_cmp(state, _BASE));
 #endif
     return state;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_LAYERS)
+    rgblight_set_layer_state(1, layer_state_cmp(state, _BASE));
     rgblight_set_layer_state(2, layer_state_cmp(state, _FN1));
     rgblight_set_layer_state(3, layer_state_cmp(state, _FN2));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
     rgblight_set_layer_state(5, layer_state_cmp(state, _NUM_FN1));
+
+    // If in NUMPAD layer and numlock off, pulse LEDs. No idea how to get this working.
+    // led_t led_state = host_keyboard_led_state();
+    // if (layer_state_cmp(state, _NUMPAD) && !led_state.num_lock) {
+    //     rgblight_mode_noeeprom(RGB_MODE_BREATHING);
+    // }
+    // else {
+    //     rgblight_mode_noeeprom(0);
+    // }
 #endif
     return state;
 }

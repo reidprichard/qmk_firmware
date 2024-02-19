@@ -8,9 +8,9 @@
 
 #define DEBOUNCE 0
 
-// Disable RGB effects to save memory
+#define RGBLIGHT_EFFECT_BREATHING
+// Disable most RGB effects to save memory
 #undef RGBLIGHT_EFFECT_ALTERNATING
-#undef RGBLIGHT_EFFECT_BREATHING
 #undef RGBLIGHT_EFFECT_CHRISTMAS
 #undef RGBLIGHT_EFFECT_KNIGHT
 #undef RGBLIGHT_EFFECT_RAINBOW_MOOD
