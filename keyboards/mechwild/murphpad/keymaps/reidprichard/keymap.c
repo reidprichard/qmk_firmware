@@ -33,18 +33,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_Q,                 KC_R,     KC_S,       KC_T,
                       KC_M,                 KC_N,     KC_O,       KC_P,
         KC_U,         KC_I,                 KC_J,     KC_K,       KC_L,
-        MO(_FN2),     KC_E,                 KC_F,     KC_G,       KC_H,
-        MO(_FN1),     KC_A,                 KC_B,     KC_C,       KC_D,
+        LM(_FN2, MOD_LALT),     KC_E,                 KC_F,     KC_G,       KC_H,
+        LM(_FN1, MOD_LCTL),     KC_A,                 KC_B,     KC_C,       KC_D,
 
                       KC_F1,                KC_F2,    KC_F3
     ),
     [_FN1] = LAYOUT(
-                      KC_MEDIA_PLAY_PAUSE,  KC_MPRV,    KC_MNXT,    KC_MUTE,
-                      JS_16,                 JS_17,       JS_18,       JS_19,
-                      JS_12,                 JS_13,       JS_14,       JS_15,
-        LCA(KC_F24),  JS_8,                 JS_9,       JS_10,       JS_11,
-        TO(_NUMPAD),  JS_4,                 JS_5,       JS_6,       JS_7,
-        MO(_FN1),     JS_0,                 JS_1,       JS_2,       JS_3,
+                      _______,                 _______,     _______,       KC_SYSTEM_SLEEP,
+                      _______,                 _______,     _______,       _______,
+                      _______,                 _______,     _______,       _______,
+        _______,      _______,                 _______,     _______,       _______,
+        TO(_NUMPAD),  _______,                 _______,     _______,       _______,
+        MO(_FN1),     _______,                 _______,     _______,       _______,
 
                       KC_F1,                 KC_F2,     KC_F3
     ),
